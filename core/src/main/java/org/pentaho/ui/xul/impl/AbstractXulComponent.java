@@ -157,6 +157,7 @@ public abstract class AbstractXulComponent implements XulComponent {
       con.invoke( method, args );
     } catch ( XulException e ) {
       logger.error( "Error calling oncommand event", e );
+      throw new RuntimeException(e);
     }
   }
 

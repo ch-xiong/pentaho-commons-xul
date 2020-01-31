@@ -12,7 +12,7 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU Lesser General Public License for more details.
  *
- * Copyright (c) 2002-2020 Hitachi Vantara..  All rights reserved.
+ * Copyright (c) 2002-2017 Hitachi Vantara..  All rights reserved.
  */
 
 package org.pentaho.ui.xul.swt.tags;
@@ -29,15 +29,9 @@ import org.pentaho.ui.xul.util.Orient;
 public class SwtGroupbox extends SwtBox implements XulGroupbox {
   private static final long serialVersionUID = 7414282626289178745L;
 
-  SwtLabel label;
-
   public SwtGroupbox( Element self, XulComponent parent, XulDomContainer container, String tagName ) {
     // XUL groupbox defaults to VERTICAL orientation
-    super( self, parent, tagName, container, Orient.VERTICAL );
-
-    // self is not needed for this SwtLabel instance
-    label = new SwtLabel( null, this, container, SwtLabel.TAG_NAME );
-    this.addChild( label );
+    super( parent, tagName, container, Orient.VERTICAL );
   }
 
   @Override
@@ -46,9 +40,7 @@ public class SwtGroupbox extends SwtBox implements XulGroupbox {
   }
 
   public void setCaption( String caption ) {
-    if ( label != null ) {
-      label.setValue( caption );
-    }
+    ( (Group) box ).setText( caption );
   }
 
 }

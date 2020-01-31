@@ -12,7 +12,11 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU Lesser General Public License for more details.
  *
- * Copyright (c) 2002-2019 Hitachi Vantara..  All rights reserved.
+ * Copyright (c) 2002-2017 Hitachi Vantara..  All rights reserved.
+ */
+
+/**
+ * 
  */
 
 package org.pentaho.ui.xul.swing.tags;
@@ -104,7 +108,6 @@ public class SwingTextbox extends SwingElement implements XulTextbox {
     }
   }
 
-  @Override
   public void layout() {
   }
 
@@ -117,12 +120,12 @@ public class SwingTextbox extends SwingElement implements XulTextbox {
   }
 
   public void setDisabled( boolean dis ) {
-    boolean oldDisabled = this.disabled;
+    boolean oldValue = this.disabled;
     this.disabled = dis;
     if ( textComp != null ) {
       textComp.setEnabled( !dis );
     }
-    this.changeSupport.firePropertyChange( "disabled", oldDisabled, dis );
+    this.changeSupport.firePropertyChange( "disabled", oldValue, dis );
   }
 
   public void setMaxlength( int length ) {
@@ -204,7 +207,7 @@ public class SwingTextbox extends SwingElement implements XulTextbox {
       switch ( this.type ) {
         case PASSWORD:
           JPasswordField pass = new JPasswordField( ( value != null ) ? value : "" );
-          pass.setPreferredSize( new Dimension( getWidth(), pass.getPreferredSize().height ) );
+          pass.setPreferredSize( new Dimension( getWidth(), 20 ) );
           pass.setMinimumSize( new Dimension( pass.getPreferredSize().width, pass.getPreferredSize().height ) );
           pass.setEditable( !readonly );
           textComp = pass;
@@ -219,6 +222,7 @@ public class SwingTextbox extends SwingElement implements XulTextbox {
             setManagedObject( scrollPane );
             textArea.setEditable( !readonly );
             this.scrollPane.setMinimumSize( new Dimension( getWidth(), this.height ) );
+            // this.scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
           } else {
             textField = new JTextField( ( value != null ) ? value : "" );
             textField.setPreferredSize( new Dimension( getWidth(), textField.getPreferredSize().height ) );
@@ -261,6 +265,13 @@ public class SwingTextbox extends SwingElement implements XulTextbox {
 
       textComp.setToolTipText( this.getTooltiptext() );
 
+      // Why do we need this here if we setup oninput in the setOninput
+      // textComp.addKeyListener(new KeyAdapter() {
+      //
+      // public void keyReleased(KeyEvent e) {
+      // invoke(onInput);
+      // }
+      // });
     }
 
     return super.getManagedObject();
@@ -271,7 +282,6 @@ public class SwingTextbox extends SwingElement implements XulTextbox {
     if ( textComp != null ) {
       textComp.addKeyListener( new KeyAdapter() {
 
-        @Override
         public void keyReleased( KeyEvent e ) {
           invoke( method );
         }

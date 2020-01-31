@@ -12,7 +12,7 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU Lesser General Public License for more details.
  *
- * Copyright (c) 2002-2019 Hitachi Vantara..  All rights reserved.
+ * Copyright (c) 2002-2017 Hitachi Vantara..  All rights reserved.
  */
 
 package org.pentaho.ui.xul.swt.tags;
@@ -27,7 +27,7 @@ public class SwtHbox extends SwtBox implements XulHbox {
   private static final long serialVersionUID = 7140735724393002713L;
 
   public SwtHbox( Element self, XulComponent parent, XulDomContainer container, String tagName ) {
-    super( self, parent, tagName, container, Orient.HORIZONTAL );
+    super( parent, tagName, container, Orient.HORIZONTAL );
   }
 
 }
